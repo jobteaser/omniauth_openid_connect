@@ -85,17 +85,6 @@ module OmniAuth
         strategy.request_phase
       end
 
-      # TODO: Remove this when all the apps have switched to organization_domain
-      def test_request_phase_with_ad_param
-        expected_redirect = /^https:\/\/example\.com\/authorize\?ad=test.example.com&client_id=1234&nonce=\w{32}&response_type=code&scope=openid&state=\w{32}$/
-        strategy.options.issuer = 'example.com'
-        strategy.options.client_options.host = 'example.com'
-        request.stubs(:params).returns('ad' => 'test.example.com')
-
-        strategy.expects(:redirect).with(regexp_matches(expected_redirect))
-        strategy.request_phase
-      end
-
       def test_request_phase_with_organization_domain_param
         expected_redirect = /^https:\/\/example\.com\/authorize\?client_id=1234&nonce=\w{32}&organization_domain=test.example.com&response_type=code&scope=openid&state=\w{32}$/
         strategy.options.issuer = 'example.com'

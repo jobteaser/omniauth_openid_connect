@@ -141,8 +141,6 @@ module OmniAuth
           prompt: request.params['prompt'],
           nonce: (new_nonce if options.send_nonce),
           hd: options.hd,
-          # TODO: Remove ad params once the apps have all switched to organization_domain
-          ad: request.params['ad'],
           organization_domain: request.params['organization_domain']
         }
         client.authorization_uri(opts.reject { |k, v| v.nil? })
